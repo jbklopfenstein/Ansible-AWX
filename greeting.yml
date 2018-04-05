@@ -1,0 +1,27 @@
+---
+- hosts: 127.0.0.1
+  name: Local Testing no Roles
+  become: yes
+
+  tasks:
+    - name: test task
+      block:
+        - name: Greet World
+          shell: echo "sup home doggies!"
+          notify: update SNOW with success
+        - debug:
+          msg: "This is a fail!"
+      rescue:
+        - name: error handle
+          shell: echo "fail saucers :( "
+
+  handlers:
+    - name: update SNOW with success
+      snow_record:
+        username: ansible_test
+        password: my_password
+        instance: dev99999
+        state: present
+        number: INC0000055
+        data:
+          work_notes : "Completed"
