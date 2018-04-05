@@ -18,6 +18,6 @@
   handlers:
     - name: update SNOW with success
       uri:
-        url: "http://google.com"
+        url: "http://httpbin.org/get"
         method: GET
         status_code: 201
