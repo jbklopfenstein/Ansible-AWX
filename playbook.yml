@@ -1,0 +1,12 @@
+---
+- hosts: localhost
+  gather_facts: no
+  vars:
+  tasks:
+  - name: Show devices including operational data
+    nso_show:
+      url: http://localhost:8080/jsonrpc
+      username: admin
+      password: admin
+      path: /ncs:devices/device
+      operational: no
