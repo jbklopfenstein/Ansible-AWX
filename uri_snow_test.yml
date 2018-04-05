@@ -17,7 +17,7 @@
 
   handlers:
     - name: update SNOW with success
-	  uri:
+      uri:
         url: "http://google.com"
         method: GET
         status_code: 201
