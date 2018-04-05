@@ -18,7 +18,7 @@
   handlers:
     - name: update SNOW with success
       uri:
-        url: "http://httpbin.org/get"
+        url: http://httpbin.org/get
         method: GET
         status_code: 200
         return
