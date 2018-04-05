@@ -7,7 +7,7 @@
     - name: test task
       block:
         - name: Greet World
-          shell: echo "sup home doggies!"
+          shell: echo "sup home doggies!" >> /testlog.txt
           notify: update SNOW with success
         - debug:
           msg: "This is a fail!"
