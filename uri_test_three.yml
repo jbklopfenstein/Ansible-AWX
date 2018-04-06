@@ -1,7 +1,8 @@
 - hosts: 127.0.0.1
   name: Local Testing no Roles
   become: yes
-
+  vars:
+    chgnumber: CHG0043054
   tasks:
     - name: test task
       block:
@@ -17,6 +18,10 @@
   handlers:
     - name: update SNOW with success
       uri:
-        url: http://httpbin.org/post
-        method: POST
+        url: https://ciscodev.service-now.com/api/now/table/change_request?sysparm_limit=1&number={{ chgnumber }}
+        method: GET
+        user: ansibleAwx
+        password: snowpassword
+        force_basic_auth: yes
+        follow_redirects: all
         status_code: 200
