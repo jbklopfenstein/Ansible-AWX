@@ -22,7 +22,7 @@
         method: POST
         user: ansibleAwx
         password: snowpassword
-        body: "{ "number":"{{ chgnumber }}","success":"1" }"
+        body: '{ "number":"{{ chgnumber }}","success":"1" }'
         body_format: json
         force_basic_auth: yes
         follow_redirects: all
