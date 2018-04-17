@@ -7,7 +7,7 @@
     - name: test task
       block:
         - name: test message
-          shell: echo "supy supy o!" >> /testlog.txt
+          shell: blah-echo "supy supy o!" >> /testlog.txt
           notify: update SNOW with success
         - debug:
             msg: "task1 is a success!"
