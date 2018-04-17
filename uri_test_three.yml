@@ -7,13 +7,24 @@
     - name: test task
       block:
         - name: test message
-          shell: echo "supy supy!" >> /testlog.txt
+          shell: echo "supy supy o!" >> /testlog.txt
           notify: update SNOW with success
         - debug:
             msg: "task1 is a success!"
       rescue:
-        - name: error handle
-          shell: echo "fail saucers" >> /testlog.txt
+        - name: update SNOW with failure
+          uri:
+            url: https://ciscodev.service-now.com/api/cisit/cis_change_api/close
+            method: POST
+            user: ansibleAwx
+            password: snowpassword
+            body: '{ "number":"{{ chgnumber }}","success":"0" }'
+            body_format: json
+            force_basic_auth: yes
+            follow_redirects: all
+            status_code: 200
+        - debug:
+            msg: "task1 reported as a failure"
 
   handlers:
     - name: update SNOW with success
@@ -27,3 +38,6 @@
         force_basic_auth: yes
         follow_redirects: all
         status_code: 200
+    - debug:
+        msg: "task1 reported as a success"
+
