@@ -10,7 +10,7 @@
           shell: blah-echo "supy supy o!" >> /testlog.txt
           notify: update SNOW with success
         - debug:
-            msg: "task1 is a success!"
+            msg: "task is a success!"
       rescue:
         - name: update SNOW with failure
           uri:
@@ -18,13 +18,13 @@
             method: POST
             user: ansibleAwx
             password: snowpassword
-            body: '{ "number":"{{ chgnumber }}","success":"0","close_code":"unsuccessful","close_notes":"AWX failed"}'
+            body: '{ "number":"{{ chgnumber }}","success":"0","close_code":"unsuccessful","close_notes":"AWX failed" }'
             body_format: json
             force_basic_auth: yes
             follow_redirects: all
             status_code: 200
         - debug:
-            msg: "task1 reported as a failure"
+            msg: "task reported as a failure"
 
   handlers:
     - name: update SNOW with success
@@ -39,5 +39,5 @@
         follow_redirects: all
         status_code: 200
     - debug:
-        msg: "task1 reported as a success"
+        msg: "task reported as a success"
 
