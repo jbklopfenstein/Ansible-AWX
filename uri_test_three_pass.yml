@@ -1,0 +1,42 @@
+- hosts: 127.0.0.1
+  name: Local Testing no Roles
+  become: yes
+  vars:
+    chgnumber: CHG0043337
+  tasks:
+    - name: test task
+      block:
+        - name: test message
+          shell: echo "helloooo!" >> /testlog.txt
+          notify: update SNOW with success
+        - debug:
+            msg: "task1 is a success!"
+      rescue:
+        - name: update SNOW with failure
+          uri:
+            url: https://ciscodev.service-now.com/api/cisit/cis_change_api/close
+            method: POST
+            user: ansibleAwx
+            password: snowpassword
+            body: '{ "number":"{{ chgnumber }}","success":"0","close_code":"unsuccessful","close_notes":"AWX failed a task" }'
+            body_format: json
+            force_basic_auth: yes
+            follow_redirects: all
+            status_code: 200
+        - debug:
+            msg: "task1 reported as a failure"
+
+  handlers:
+    - name: update SNOW with success
+      uri:
+        url: https://ciscodev.service-now.com/api/cisit/cis_change_api/close
+        method: POST
+        user: ansibleAwx
+        password: snowpassword
+        body: '{ "number":"{{ chgnumber }}","success":"1" }'
+        body_format: json
+        force_basic_auth: yes
+        follow_redirects: all
+        status_code: 200
+    - debug:
+        msg: "task1 reported as a success"
