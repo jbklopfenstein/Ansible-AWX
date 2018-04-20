@@ -10,7 +10,7 @@
           shell: echo "helloooo!" >> /testlog.txt
           notify: update SNOW with success
         - debug:
-            msg: "task1 is a success!"
+            msg: "task is a success!"
       rescue:
         - name: update SNOW with failure
           uri:
@@ -24,7 +24,7 @@
             follow_redirects: all
             status_code: 200
         - debug:
-            msg: "task1 reported as a failure"
+            msg: "task reported as a failure"
 
   handlers:
     - name: update SNOW with success
@@ -39,4 +39,4 @@
         follow_redirects: all
         status_code: 200
     - debug:
-        msg: "task1 reported as a success"
+        msg: "task reported as a success"
