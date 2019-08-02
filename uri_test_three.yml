@@ -14,10 +14,10 @@
       rescue:
         - name: update SNOW with failure
           uri:
-            url: https://ciscodev.service-now.com/api/cisit/cis_change_api/close
+            url: https://cisco
             method: POST
-            user: ansibleAwx
-            password: snowpassword
+            user: 
+            password:
             body: '{ "number":"{{ chgnumber }}","success":"0","close_code":"unsuccessful","close_notes":"AWX failed" }'
             body_format: json
             force_basic_auth: yes
@@ -29,10 +29,10 @@
   handlers:
     - name: update SNOW with success
       uri:
-        url: https://ciscodev.service-now.com/api/cisit/cis_change_api/close
+        url: https://cisco
         method: POST
-        user: ansibleAwx
-        password: snowpassword
+        user: 
+        password:
         body: '{ "number":"{{ chgnumber }}","success":"1" }'
         body_format: json
         force_basic_auth: yes
